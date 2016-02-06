@@ -17,6 +17,7 @@ const int Forward = 7; //Inputs from RC receiver
 const int Strafe = 2;  
 const int Rotate = 3;  
 
+// outputs to motor controllers
 const int Fl = 10;
 const int Fr = 9;
 const int Rl = 6;
