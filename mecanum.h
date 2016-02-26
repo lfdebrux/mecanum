@@ -13,15 +13,15 @@ const unsigned long timeout = 30000;
 
 const int DEADZONE = 100;
 
-const int Forward = 7; //Inputs from RC receiver
-const int Strafe = 2;  
-const int Rotate = 3;  
+const int Forward = 11; //Inputs from RC receiver
+const int Strafe = 12;  
+const int Rotate = 13;  
 
 // outputs to motor controllers
-const int Fl = 10;
-const int Fr = 9;
-const int Rl = 6;
-const int Rr = 5;
+const int Fl = 9;
+const int Fr = 6;
+const int Rl = 5;
+const int Rr = 3;
 
 typedef signed long rc_pulse_t;
 typedef unsigned long servo_pulse_t; 
