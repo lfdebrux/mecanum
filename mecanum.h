@@ -3,11 +3,7 @@
 
 #include <Servo.h>
 
-#define DEBUG false
-
-const unsigned long MIN_WIDTH = 1000;
-const unsigned long NORM_WIDTH = 1500;
-const unsigned long MAX_WIDTH = 1500;
+#define debug false
 
 const unsigned long timeout = 30000;
 
@@ -23,8 +19,12 @@ const int Fr = 6;
 const int Rl = 5;
 const int Rr = 3;
 
-typedef signed long rc_pulse_t;
-typedef signed long servo_pulse_t;
+typedef signed int rc_pulse_t;
+typedef signed int servo_pulse_t;
+
+const servo_pulse_t MIN_WIDTH = 1000;
+const servo_pulse_t NORM_WIDTH = 1500;
+const servo_pulse_t MAX_WIDTH = 1500;
 
 rc_pulse_t ForwardDuration; //To store the duration of the pulses
 rc_pulse_t StrafeDuration;    //coming from the receiver
