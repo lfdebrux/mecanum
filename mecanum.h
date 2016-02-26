@@ -24,7 +24,7 @@ const int Rl = 5;
 const int Rr = 3;
 
 typedef signed long rc_pulse_t;
-typedef unsigned long servo_pulse_t; 
+typedef signed long servo_pulse_t;
 
 rc_pulse_t ForwardDuration; //To store the duration of the pulses
 rc_pulse_t StrafeDuration;    //coming from the receiver
