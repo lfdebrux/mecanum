@@ -1,4 +1,16 @@
-#include <mecanum.h>
+#include "mecanum.h"
+
+// default to no movement if no pulse is detected
+// or the signal is very close to centre
+rc_pulse_t sanitise(rc_pulse_t in) {
+  if (in != 0) {
+    in -= NORM_WIDTH;
+    if (abs(in) < DEADZONE) {
+      in = 0;
+    }
+  }
+  return in;
+}
 
 void setup()
 {
@@ -15,21 +27,13 @@ void setup()
 void loop()
 {
   // read receiver signals
-  ForwardDuration = pulseIn(Forward, HIGH, timeout) - NORM_WIDTH;
-  StrafeDuration = pulseIn(Strafe, HIGH, timeout) - NORM_WIDTH;
-  RotateDuration = pulseIn(Rotate, HIGH, timeout) - NORM_WIDTH;
+  ForwardDuration = pulseIn(Forward, HIGH, timeout);
+  StrafeDuration = pulseIn(Strafe, HIGH, timeout);
+  RotateDuration = pulseIn(Rotate, HIGH, timeout);
 
-  // default to no movement if no pulse is detected
-  // or the signal is very close to centre
-  if (ForwardDuration != 0 && abs(ForwardDuration) < DEADZONE) {
-    ForwardDuration = 0;
-  }
-  if (StrafeDuration != 0 && abs(StrafeDuration) < DEADZONE) {
-    StrafeDuration = 0;
-  }
-  if (RotateDuration != 0 && abs(RotateDuration) < DEADZONE) {
-    RotateDuration = 0; 
-  }
+  ForwardDuration = sanitise(ForwardDuration);
+  StrafeDuration = sanitise(StrafeDuration);
+  RotateDuration = sanitise(RotateDuration);
 
   // mix the signals
   FL = ForwardDuration + StrafeDuration + RotateDuration + NORM_WIDTH;
@@ -51,6 +55,8 @@ void loop()
 
   if (debug) {
     Serial.print(ForwardDuration);
+    Serial.print(", ");
+    Serial.print(StrafeDuration);
     Serial.print(", ");
     Serial.print(RotateDuration);
     Serial.print(" => ");
